@@ -6,7 +6,8 @@ let form = document.querySelector(".form");
 let myLibrary = [];
 let book1 = new Book("Sapiens", "Yuval Hoah Farari", 200, false);
 let book2 = new Book("Ishmael", "Daniel Quinn", 282, true);
-myLibrary.push(book1, book2);
+let book3 = new Book("Mastery", "Robert Greene", 338, true);
+myLibrary.push(book1, book2, book3);
 
 function Book(title, author, numOfPages, isRead) {
   this.title = title;
@@ -31,6 +32,7 @@ for (const book of myLibrary) {
   div.appendChild(paraPages);
   div.appendChild(paraDidRead);
 
+  div.className = "book";
   paraTitle.textContent = book.title;
   paraAuthor.textContent = book.author;
   paraPages.textContent = book.numOfPages;
@@ -41,4 +43,5 @@ for (const book of myLibrary) {
 showBtn.addEventListener("click", (e) => {
   wrapper.classList.toggle("active");
   form.classList.toggle("active");
+  showBtn.textContent = `${showBtn.textContent === "Show form" ? "Close form" : "Show form"}`;
 });

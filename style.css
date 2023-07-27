@@ -9,7 +9,6 @@ html {
   color: #d2d2d2;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
-  overflow-y: scroll;
 }
 
 body {
@@ -21,7 +20,7 @@ a {
 }
 
 #dragDiv {
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   right: 20px;
 }
@@ -47,7 +46,7 @@ input[type="text"]:focus {
   max-width: 1000px;
   width: 80%;
   margin: 0 auto;
-  padding: 50px 20px;
+  padding-top: 50px;
   position: relative;
 }
 
@@ -63,16 +62,22 @@ input[type="text"]:focus {
   padding: 50px 50px;
   margin: 50px 0;
 
-  max-width: 500px;
+  width: 100%;
+  position: absolute;
+  transform: scale(0);
+  transform-origin: top;
+  display: flex;
+  justify-content: center;
+}
+
+.form-inner-wrapper {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  position: absolute;
-  transform: scale(0);
+  max-width: 500px;
 }
 
 .row {
-  max-width: 500px;
   display: grid;
   /*https://stackoverflow.com/questions/47601564/equal-width-columns-in-css-grid*/
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -114,11 +119,10 @@ label[for="no"] {
 .btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   border: none;
   height: 50px;
   border-radius: 15px;
-  display: flex;
-  justify-content: center;
   background-color: #424242;
   color: inherit;
   font-weight: 600;
@@ -135,5 +139,18 @@ label[for="no"] {
   transform: translateY(-5px);
 }
 
+.btn.show {
+  margin: 20px 0;
+}
+
 .books {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.book {
+  height: 200px;
+  outline: 3px solid #c2c2c2;
+  background-color: #2d2d2d;
 }

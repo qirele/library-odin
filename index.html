@@ -13,38 +13,40 @@
   <body>
     <div class="wrapper">
       <div class="books"></div>
-      <div class="btn show">Show me</div>
+      <div class="btn show">Show form</div>
       <form class="form">
-        <div class="row">
-          <label for="title">Title: </label>
-          <input type="text" name="title" id="title" />
-        </div>
-        <div class="row">
-          <label for="author">Author: </label>
-          <input type="text" name="author" id="author" />
-        </div>
-        <div class="row">
-          <label for="numOfPages">Number of pages: </label>
-          <input type="text" name="numOfPages" id="numOfPages" />
-        </div>
-        <div class="row">
-          <p>Did read?</p>
-          <div class="radio-wrapper">
-            <label for="yes">
-              <div>
-                <p>Yes</p>
-                <input type="radio" name="isRead" value="yes" id="yes" />
-              </div>
-            </label>
-            <label for="no">
-              <div>
-                <p>No</p>
-                <input type="radio" name="isRead" value="no" id="no" />
-              </div>
-            </label>
+        <div class="form-inner-wrapper">
+          <div class="row">
+            <label for="title">Title: </label>
+            <input type="text" name="title" id="title" />
           </div>
+          <div class="row">
+            <label for="author">Author: </label>
+            <input type="text" name="author" id="author" />
+          </div>
+          <div class="row">
+            <label for="numOfPages">Number of pages: </label>
+            <input type="text" name="numOfPages" id="numOfPages" />
+          </div>
+          <div class="row">
+            <p>Did read?</p>
+            <div class="radio-wrapper">
+              <label for="yes">
+                <div>
+                  <p>Yes</p>
+                  <input type="radio" name="isRead" value="yes" id="yes" />
+                </div>
+              </label>
+              <label for="no">
+                <div>
+                  <p>No</p>
+                  <input type="radio" name="isRead" value="no" id="no" />
+                </div>
+              </label>
+            </div>
+          </div>
+          <button type="button" class="btn">Add book</button>
         </div>
-        <button type="button" class="btn">Add book</button>
       </form>
     </div>
     <a href="https://qirele.github.io/library-odin/dragDiv.html" id="dragDiv">Go drag a div!</a>
