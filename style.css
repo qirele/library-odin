@@ -9,17 +9,21 @@ html {
   color: #d2d2d2;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
+  overflow-y: scroll;
 }
 
 body {
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
 }
 
 a {
   color: inherit;
+}
+
+#dragDiv {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 
 input[type="text"] {
@@ -40,31 +44,35 @@ input[type="text"]:focus {
 }
 
 .wrapper {
-  width: 500px;
-  height: 500px;
-  background-color: #181818;
-  transition: all 0.1s;
-  border-radius: 10px;
-  box-shadow: 0px 7px 15px #000000;
-  padding: 20px 50px;
+  max-width: 1000px;
+  width: 80%;
+  margin: 0 auto;
+  padding: 50px 20px;
+  position: relative;
 }
 
-.wrapper span {
-  display: block;
-}
-
-#dragDiv {
-  position: absolute;
-  top: 20px;
+.form.active {
+  transform: scale(1);
 }
 
 .form {
+  background-color: #181818;
+  transition: all 0.2s;
+  border-radius: 10px;
+  box-shadow: 0px 7px 15px #000000;
+  padding: 50px 50px;
+  margin: 50px 0;
+
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  position: absolute;
+  transform: scale(0);
 }
 
 .row {
+  max-width: 500px;
   display: grid;
   /*https://stackoverflow.com/questions/47601564/equal-width-columns-in-css-grid*/
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -85,6 +93,7 @@ input[type="text"]:focus {
   height: 100%;
   border-radius: 15px;
   overflow: hidden;
+  box-shadow: 0px 7px 15px #000000;
 }
 
 .radio-wrapper > * {
@@ -124,4 +133,7 @@ label[for="no"] {
   box-shadow: 0px 7px 15px #717070;
   background-color: #6d3f3f;
   transform: translateY(-5px);
+}
+
+.books {
 }
