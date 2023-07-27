@@ -13,7 +13,7 @@ body {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  overflow: hidden;  
+  overflow: hidden;
 }
 
 .wrapper {
@@ -22,12 +22,19 @@ body {
   display: grid;
   place-items: center;
   text-align: center;
+  user-select: none;
   background-color: #181818;
-  transition: all .1s;
+  transition: all 0.1s;
   border-radius: 10px;
   box-shadow: 0px 10px 15px 5px #413131;
 }
 
 .wrapper span {
   display: block;
+}
+
+#home {
+  position: absolute; 
+  top: 20px;
+  color: white;
 }
