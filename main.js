@@ -1,18 +1,36 @@
-let booksDiv = document.querySelector(".books");
-let showBtn = document.querySelector(".show");
-let wrapper = document.querySelector(".wrapper");
-let form = document.querySelector(".form");
-let addBtn = document.querySelector(".btn.add");
+const booksDiv = document.querySelector(".books");
+const showBtn = document.querySelector(".show");
+const wrapper = document.querySelector(".wrapper");
+const form = document.querySelector(".form");
+const addBtn = document.querySelector(".btn.add");
 
-let myLibrary = [];
-let book1 = new Book("Sapiens", "Yuval Hoah Farari", 200, false);
-let book2 = new Book("Lord of the flies", "William Golding", 103, true);
-let book3 = new Book("Ishamel", "Daniel Quinn", 285, true);
+const myLibrary = [];
+const book1 = new Book("Sapiens", "Yuval Hoah Farari", 200, false);
+const book2 = new Book("Lord of the flies", "William Golding", 103, true);
+const book3 = new Book("Ishamel", "Daniel Quinn", 285, true);
 myLibrary.push(book1, book2, book3);
 populateBooks();
 
+// fetch buttons after populating books, otherwise they dont exist yet
+let deleteBtns = booksDiv.querySelectorAll(".remove");
+let checkmarkBtns = booksDiv.querySelectorAll(".check-read");
+deleteBtns.forEach((btn) => btn.addEventListener("click", handleDelete));
+checkmarkBtns.forEach((btn) => btn.addEventListener("click", handleCheckmark));
 showBtn.addEventListener("click", toggleForm);
 form.addEventListener("submit", handleSubmit);
+
+function handleCheckmark(e) {
+  const bookIdx = e.target.parentNode.dataset.index;
+}
+
+function handleDelete(e) {
+  const bookIdx = e.target.parentNode.dataset.index;
+  console.log(bookIdx);
+  myLibrary.splice(bookIdx, 1);
+  populateBooks();
+  deleteBtns = booksDiv.querySelectorAll(".remove");
+  deleteBtns.forEach((btn) => btn.addEventListener("click", handleDelete));
+}
 
 function Book(title, author, numOfPages, isRead) {
   this.title = title;
@@ -33,6 +51,8 @@ function removeChildren(element) {
 }
 
 function populateBooks() {
+  removeChildren(booksDiv);
+
   for (let i = 0; i < myLibrary.length; i++) {
     let book = myLibrary[i];
     const div = document.createElement("div");
@@ -75,9 +95,10 @@ function handleSubmit(e) {
   let numPages = e.target.numOfPages.value;
   let isRead = e.target.isRead.value;
 
-  addBookToLibrary(title, author, numPages, isRead);
-  removeChildren(booksDiv);
+  addBookToLibrary(title, author, numPages, isRead === "yes");
   populateBooks();
+  deleteBtns = booksDiv.querySelectorAll(".remove");
+  deleteBtns.forEach((btn) => btn.addEventListener("click", handleDelete));
   // reset form
   form.reset();
 }
