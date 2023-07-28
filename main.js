@@ -9,6 +9,9 @@ let book1 = new Book("Sapiens", "Yuval Hoah Farari", 200, false);
 myLibrary.push(book1);
 populateBooks();
 
+showBtn.addEventListener("click", toggleForm);
+form.addEventListener("submit", handleSubmit);
+
 function Book(title, author, numOfPages, isRead) {
   this.title = title;
   this.author = author;
@@ -48,13 +51,12 @@ function populateBooks() {
   }
 }
 
-showBtn.addEventListener("click", (e) => {
-  wrapper.classList.toggle("active");
+function toggleForm() {
   form.classList.toggle("active");
   showBtn.textContent = `${showBtn.textContent === "Show form" ? "Close form" : "Show form"}`;
-});
+}
 
-form.addEventListener("submit", (e) => {
+function handleSubmit(e) {
   e.preventDefault();
 
   let title = e.target.title.value;
@@ -65,4 +67,6 @@ form.addEventListener("submit", (e) => {
   addBookToLibrary(title, author, numPages, isRead);
   removeChildren(booksDiv);
   populateBooks();
-});
+  // reset form
+  form.reset();
+}
