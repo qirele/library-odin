@@ -12,7 +12,9 @@
   </head>
   <body>
     <div class="wrapper">
-      <button class="btn show">Show form</button>
+      <div class="btn-wrapper">
+        <button class="btn show">Show form</button>
+      </div>
       <form class="form">
         <div class="form-inner-wrapper">
           <div class="row">
@@ -33,7 +35,7 @@
               <label for="yes">
                 <div>
                   <p>Yes</p>
-                  <input type="radio" name="isRead" value="yes" id="yes" />
+                  <input type="radio" name="isRead" value="yes" id="yes" checked />
                 </div>
               </label>
               <label for="no">
@@ -47,8 +49,9 @@
           <button type="submit" class="btn add">Add book</button>
         </div>
       </form>
+      <h1>My library</h1>
       <div class="books"></div>
     </div>
-    <a href="https://qirele.github.io/library-odin/dragDiv.html" id="dragDiv">Go drag a div!</a>
+    <a href="./dragDiv.html" id="dragDiv">Go drag a div!</a>
   </body>
 </html>

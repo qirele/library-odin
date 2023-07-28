@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all 0.2s;
 }
 
 html {
@@ -17,6 +18,11 @@ body {
 
 a {
   color: inherit;
+}
+
+h1 {
+  margin-bottom: 5px;
+  opacity: 1;
 }
 
 #dragDiv {
@@ -44,9 +50,8 @@ input[type="text"]:focus {
 
 .wrapper {
   max-width: 1000px;
-  width: 80%;
+  width: 95%;
   margin: 0 auto;
-  padding-top: 10px;
   position: relative;
 }
 
@@ -55,7 +60,8 @@ input[type="text"]:focus {
   z-index: 100;
 }
 
-.form.active ~ .books {
+.form.active ~ .books,
+.form.active ~ h1 {
   opacity: 0.2;
 }
 
@@ -64,26 +70,22 @@ input[type="text"]:focus {
 }
 
 .form {
-  transition: all 0.2s;
-
   width: 100%;
-  margin: 0 auto;
   position: absolute;
   transform: scale(0);
   transform-origin: top;
-  display: flex;
-  justify-content: center;
 }
 
 .form-inner-wrapper {
   background-color: #1e1e1e;
-  padding: 50px 50px;
+  padding: 50px;
   box-shadow: 0px 7px 15px #000000;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   max-width: 500px;
+  margin: 0 auto;
 }
 
 .row {
@@ -100,6 +102,10 @@ input[type="text"]:focus {
 
 .row > *:first-child {
   line-height: 3;
+}
+
+.row > [for="numOfPages"] {
+  line-height: 1;
 }
 
 .radio-wrapper {
@@ -136,8 +142,8 @@ label[for="no"] {
   color: inherit;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
   box-shadow: 0px 7px 15px #000000;
+  font-size: 2rem;
 }
 
 .btn:focus,
@@ -150,21 +156,92 @@ label[for="no"] {
   transform: translateY(-5px);
 }
 
+.btn-wrapper {
+  margin: 20px auto;
+  max-width: 500px;
+}
+
 .btn.show {
-  margin: 20px 0;
+  display: block;
   width: 100%;
 }
 
 .books {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  transition: all 0.2s;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px 20px;
   opacity: 1;
 }
 
 .book {
-  height: 200px;
-  outline: 3px solid #c2c2c2;
+  min-height: 200px;
   background-color: #2d2d2d;
+  box-shadow: 0px 7px 15px #000000;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  font-weight: 600;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.book > p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book > * {
+  flex: 1;
+}
+
+.book > :first-child {
+  padding: 0 30px;
+}
+
+.book > :nth-child(2n) {
+  background-color: #313131;
+}
+
+.book .read {
+  background-color: #0a2711;
+  color: #c2c2c2;
+}
+
+.book .didnt-read {
+  background-color: #350c0c;
+  color: #c2c2c2;
+}
+
+.book .remove,
+.book .check-read {
+  position: absolute;
+  top: 0;
+  color: white;
+  font-weight: 600;
+  font-size: 1.5rem;
+  align-self: start;
+  line-height: 1;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  background-size: 50%;
+  height: 50px;
+  width: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.book .remove {
+  right: 0;
+  background-color: #350c0c;
+  background-image: url(./icons/delete.svg);
+}
+
+.book .check-read {
+  left: 0;
+  background-color: #0a2711;
+  background-image: url(./icons/check.svg);
 }

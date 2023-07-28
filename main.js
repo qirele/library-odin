@@ -6,7 +6,9 @@ let addBtn = document.querySelector(".btn.add");
 
 let myLibrary = [];
 let book1 = new Book("Sapiens", "Yuval Hoah Farari", 200, false);
-myLibrary.push(book1);
+let book2 = new Book("Lord of the flies", "William Golding", 103, true);
+let book3 = new Book("Ishamel", "Daniel Quinn", 285, true);
+myLibrary.push(book1, book2, book3);
 populateBooks();
 
 showBtn.addEventListener("click", toggleForm);
@@ -31,22 +33,31 @@ function removeChildren(element) {
 }
 
 function populateBooks() {
-  for (const book of myLibrary) {
+  for (let i = 0; i < myLibrary.length; i++) {
+    let book = myLibrary[i];
     const div = document.createElement("div");
     const paraTitle = document.createElement("p");
     const paraAuthor = document.createElement("p");
     const paraPages = document.createElement("p");
     const paraDidRead = document.createElement("p");
+    const removeBtn = document.createElement("button");
+    const checkBtn = document.createElement("button");
     div.appendChild(paraTitle);
     div.appendChild(paraAuthor);
     div.appendChild(paraPages);
     div.appendChild(paraDidRead);
+    div.appendChild(removeBtn);
+    div.appendChild(checkBtn);
 
     div.className = "book";
+    div.setAttribute("data-index", i);
     paraTitle.textContent = book.title;
     paraAuthor.textContent = book.author;
     paraPages.textContent = book.numOfPages;
-    paraDidRead.textContent = book.isRead;
+    paraDidRead.textContent = `${book.isRead ? "read :)" : "DIDN'T READ"}`;
+    removeBtn.classList.add("remove");
+    checkBtn.classList.add("check-read");
+    paraDidRead.classList.add(`${book.isRead ? "read" : "didnt-read"}`);
     booksDiv.appendChild(div);
   }
 }
