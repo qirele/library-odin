@@ -1,35 +1,29 @@
 const booksDiv = document.querySelector(".books");
 const showBtn = document.querySelector(".show");
-const wrapper = document.querySelector(".wrapper");
 const form = document.querySelector(".form");
 const addBtn = document.querySelector(".btn.add");
 
 const myLibrary = [];
-const book1 = new Book("Sapiens", "Yuval Hoah Farari", 200, false);
+const book1 = new Book("Sapiens", "Yuval Noah Harari", 200, false);
 const book2 = new Book("Lord of the flies", "William Golding", 103, true);
-const book3 = new Book("Ishamel", "Daniel Quinn", 285, true);
+const book3 = new Book("Ishmael", "Daniel Quinn", 285, true);
+let deleteBtns, checkmarkBtns; // we get these values right at the end of populateBooks() call
 myLibrary.push(book1, book2, book3);
 populateBooks();
 
-// fetch buttons after populating books, otherwise they dont exist yet
-let deleteBtns = booksDiv.querySelectorAll(".remove");
-let checkmarkBtns = booksDiv.querySelectorAll(".check-read");
-deleteBtns.forEach((btn) => btn.addEventListener("click", handleDelete));
-checkmarkBtns.forEach((btn) => btn.addEventListener("click", handleCheckmark));
 showBtn.addEventListener("click", toggleForm);
 form.addEventListener("submit", handleSubmit);
 
 function handleCheckmark(e) {
   const bookIdx = e.target.parentNode.dataset.index;
+  myLibrary[bookIdx].toggleReadStatus();
+  populateBooks();
 }
 
 function handleDelete(e) {
   const bookIdx = e.target.parentNode.dataset.index;
-  console.log(bookIdx);
   myLibrary.splice(bookIdx, 1);
   populateBooks();
-  deleteBtns = booksDiv.querySelectorAll(".remove");
-  deleteBtns.forEach((btn) => btn.addEventListener("click", handleDelete));
 }
 
 function Book(title, author, numOfPages, isRead) {
@@ -38,6 +32,10 @@ function Book(title, author, numOfPages, isRead) {
   this.numOfPages = numOfPages;
   this.isRead = isRead;
 }
+
+Book.prototype.toggleReadStatus = function () {
+  this.isRead = !this.isRead;
+};
 
 function addBookToLibrary(title, author, numOfPages, isRead) {
   let book = new Book(title, author, numOfPages, isRead);
@@ -80,6 +78,11 @@ function populateBooks() {
     paraDidRead.classList.add(`${book.isRead ? "read" : "didnt-read"}`);
     booksDiv.appendChild(div);
   }
+  // gotta recalculate the delete and check buttons after user interacts with books
+  deleteBtns = booksDiv.querySelectorAll(".remove");
+  checkmarkBtns = booksDiv.querySelectorAll(".check-read");
+  deleteBtns.forEach((btn) => btn.addEventListener("click", handleDelete));
+  checkmarkBtns.forEach((btn) => btn.addEventListener("click", handleCheckmark));
 }
 
 function toggleForm() {
@@ -97,8 +100,5 @@ function handleSubmit(e) {
 
   addBookToLibrary(title, author, numPages, isRead === "yes");
   populateBooks();
-  deleteBtns = booksDiv.querySelectorAll(".remove");
-  deleteBtns.forEach((btn) => btn.addEventListener("click", handleDelete));
-  // reset form
-  form.reset();
+  form.reset(); // reset fields
 }
