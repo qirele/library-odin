@@ -53,30 +53,56 @@ function populateBooks() {
 
   for (let i = 0; i < myLibrary.length; i++) {
     let book = myLibrary[i];
-    const div = document.createElement("div");
-    const paraTitle = document.createElement("p");
-    const paraAuthor = document.createElement("p");
-    const paraPages = document.createElement("p");
-    const paraDidRead = document.createElement("p");
+    const bookDiv = document.createElement("div");
+    const divTitle = document.createElement("div");
+    const paraTitleLabel = document.createElement("p");
+    const paraTitleText = document.createElement("p");
+    const divAuthor = document.createElement("div");
+    const paraAuthorLabel = document.createElement("p");
+    const paraAuthorText = document.createElement("p");
+    const divPages = document.createElement("div");
+    const paraPagesNum = document.createElement("p");
+    const paraPagesLabel = document.createElement("p");
+    const divRead = document.createElement("div");
+    const paraReadLabel = document.createElement("p");
+    const paraReadText = document.createElement("p");
     const removeBtn = document.createElement("button");
     const checkBtn = document.createElement("button");
-    div.appendChild(paraTitle);
-    div.appendChild(paraAuthor);
-    div.appendChild(paraPages);
-    div.appendChild(paraDidRead);
-    div.appendChild(removeBtn);
-    div.appendChild(checkBtn);
+    divTitle.appendChild(paraTitleLabel);
+    divTitle.appendChild(paraTitleText);
+    divAuthor.appendChild(paraAuthorLabel);
+    divAuthor.appendChild(paraAuthorText);
+    divPages.appendChild(paraPagesLabel);
+    divPages.appendChild(paraPagesNum);
+    divRead.appendChild(paraReadLabel);
+    divRead.appendChild(paraReadText);
+    bookDiv.appendChild(divTitle);
+    bookDiv.appendChild(divAuthor);
+    bookDiv.appendChild(divPages);
+    bookDiv.appendChild(divRead);
+    bookDiv.appendChild(removeBtn);
+    bookDiv.appendChild(checkBtn);
+    bookDiv.className = "book";
+    bookDiv.setAttribute("data-index", i);
 
-    div.className = "book";
-    div.setAttribute("data-index", i);
-    paraTitle.textContent = book.title;
-    paraAuthor.textContent = book.author;
-    paraPages.textContent = book.numOfPages;
-    paraDidRead.textContent = `${book.isRead ? "read :)" : "DIDN'T READ"}`;
-    removeBtn.classList.add("remove");
-    checkBtn.classList.add("check-read");
-    paraDidRead.classList.add(`${book.isRead ? "read" : "didnt-read"}`);
-    booksDiv.appendChild(div);
+    paraTitleLabel.textContent = "Title";
+    paraTitleText.textContent = book.title;
+    paraAuthorLabel.textContent = "Author";
+    paraAuthorText.textContent = book.author;
+    paraPagesLabel.textContent = "Number of pages";
+    paraPagesNum.textContent = book.numOfPages;
+    paraReadText.textContent = `${book.isRead ? "read :)" : "DIDN'T READ"}`;
+    paraReadLabel.textContent = "Status";
+
+    removeBtn.className = "remove";
+    checkBtn.className = "check-read";
+    divRead.className = `${book.isRead ? "read" : "didnt-read"}`;
+    paraPagesLabel.className = "label";
+    paraTitleLabel.className = "label";
+    paraAuthorLabel.className = "label";
+    paraReadLabel.className = "label";
+
+    booksDiv.appendChild(bookDiv);
   }
   // gotta recalculate the delete and check buttons after user interacts with books
   deleteBtns = booksDiv.querySelectorAll(".remove");
@@ -87,7 +113,7 @@ function populateBooks() {
 
 function toggleForm() {
   form.classList.toggle("active");
-  showBtn.textContent = `${showBtn.textContent === "Show form" ? "Close form" : "Show form"}`;
+  showBtn.textContent = `${showBtn.textContent === "Add book" ? "Close form" : "Add book"}`;
 }
 
 function handleSubmit(e) {

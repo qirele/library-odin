@@ -174,7 +174,7 @@ label[for="no"] {
 }
 
 .book {
-  min-height: 200px;
+  min-height: 270px;
   background-color: #2d2d2d;
   box-shadow: 0px 7px 15px #000000;
   border-radius: 15px;
@@ -185,13 +185,18 @@ label[for="no"] {
   font-weight: 600;
   letter-spacing: 1px;
   position: relative;
+  font-size: 1.2rem;
 }
 
-.book > p {
+.book > div {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   text-align: center;
+  gap: 3px;
+}
+
+.book > div > p:last-child {
+  flex: 1;
 }
 
 .book > * {
@@ -245,4 +250,12 @@ label[for="no"] {
   left: 0;
   background-color: #0a2711;
   background-image: url(./icons/check.svg);
+}
+
+.label {
+  align-self: flex-start;
+  padding-left: 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #4a4a4a;
 }
