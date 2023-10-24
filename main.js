@@ -2,10 +2,10 @@ const booksDiv = document.querySelector(".books");
 const showBtn = document.querySelector(".show");
 const form = document.querySelector(".form");
 const addBtn = document.querySelector(".btn.add");
-const titleErrorPara = document.querySelector(".error-title");
-const authorErrorPara = document.querySelector(".error-author");
-const numberErrorPara = document.querySelector(".error-number");
-const didreadErrorPara = document.querySelector(".error-didread");
+const titleErrorPara = document.querySelector(`label[for="title"] .error`);
+const authorErrorPara = document.querySelector(`label[for="author"] .error`);
+const numberErrorPara = document.querySelector(`label[for="numOfPages"] .error`);
+const didreadErrorPara = document.querySelector(`.label-didread .error`);
 
 const myLibrary = [];
 const book1 = new Book("Sapiens", "Yuval Noah Harari", 200, false);
@@ -20,6 +20,7 @@ form.addEventListener("submit", handleSubmit);
 form.title.addEventListener("input", handleInputTitle);
 form.author.addEventListener("input", handleInputAuthor);
 form.numOfPages.addEventListener("input", handleInputNumber);
+form.isRead.forEach(radio => radio.addEventListener("input", handleInputIsRead));
 
 function handleCheckmark(e) {
   const bookIdx = e.target.parentNode.dataset.index;
@@ -126,6 +127,8 @@ function toggleForm() {
 function handleSubmit(e) {
   e.preventDefault();
 
+  console.log(form.isRead.validity);
+
   let shouldSubmit = true;
 
   if (!form.title.validity.valid) {
@@ -138,8 +141,17 @@ function handleSubmit(e) {
     shouldSubmit = false;
   }
 
-  if (!shouldSubmit) return;
+  if (!form.numOfPages.validity.valid) {
+    showNumberError();
+    shouldSubmit = false;
+  }
 
+  if (!areRadioBtnsValid()) {
+    showDidreadError();
+    shouldSubmit = false;
+  }
+
+  if (!shouldSubmit) return;
 
   let title = e.target.title.value;
   let author = e.target.author.value;
@@ -152,33 +164,36 @@ function handleSubmit(e) {
 }
 
 function showTitleError() {
-  if (form.title.validity.valueMissing) {
+  if (form.title.validity.valueMissing)
     titleErrorPara.textContent = "You gotta provide a title brochocho";
-  } else if (form.title.validity.tooShort) {
-    titleErrorPara.textContent = `Title should be at least ${form.title.minLength} characters; you entered ${form.title.value.length}.`;
-  }
 
-  titleErrorPara.className = "error-title active";
+  titleErrorPara.className = "error active";
 }
+
 function showAuthorError() {
-  if (form.author.validity.valueMissing) {
+  if (form.author.validity.valueMissing)
     authorErrorPara.textContent = "You gotta provide an author buddy";
-  } else if (form.author.validity.tooShort) {
-    authorErrorPara.textContent = `Author should be at least ${form.author.minLength} characters; you entered ${form.author.value.length}.`;
-  }
 
-  authorErrorPara.className = "error-author active";
+  authorErrorPara.className = "error active";
 }
+
 function showNumberError() {
+  if (form.numOfPages.validity.valueMissing)
+    numberErrorPara.textContent = "Forget much? Provide a number of pages pal";
+
+  numberErrorPara.className = "error active";
 
 }
+
 function showDidreadError() {
+  didreadErrorPara.textContent = "Hey, hey. Just answer yes or no";
+  didreadErrorPara.className = "error active";
 }
 
 function handleInputTitle(e) {
   if (form.title.validity.valid) {
     titleErrorPara.textContent = "";
-    titleErrorPara.className = "error-title";
+    titleErrorPara.className = "error";
   } else {
     showTitleError();
   }
@@ -187,7 +202,7 @@ function handleInputTitle(e) {
 function handleInputAuthor(e) {
   if (form.author.validity.valid) {
     authorErrorPara.textContent = "";
-    authorErrorPara.className = "error-title";
+    authorErrorPara.className = "error";
   } else {
     showAuthorError();
   }
@@ -196,8 +211,24 @@ function handleInputAuthor(e) {
 function handleInputNumber(e) {
   if (form.numOfPages.validity.valid) {
     numberErrorPara.textContent = "";
-    numberErrorPara.className = "error-title";
+    numberErrorPara.className = "error";
   } else {
     showNumberError();
   }
+}
+
+function handleInputIsRead(e) {
+  if (e.target.checked) {
+    didreadErrorPara.textContent = "";
+    didreadErrorPara.className = "error";
+  } else {
+    showDidreadError();
+  }
+}
+
+function areRadioBtnsValid() {
+  for (const radio of form.isRead) {
+    if (radio.checked) return true;
+  }
+  return false;
 }

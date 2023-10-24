@@ -42,6 +42,7 @@ input[type="number"] {
   border-radius: 15px;
   height: 100%;
   box-shadow: 0px 7px 15px #000000;
+  outline: 1px solid #c2c2c2;
 }
 
 input[type="text"]:focus,
@@ -263,22 +264,16 @@ label[for="no"] {
 
 input[type="text"]:invalid:focus,
 input[type="number"]:invalid:focus {
-  outline: 5px solid #ff9494;
+  outline: 5px solid #fa7d7d;
 }
 
-.error-title,
-.error-author,
-.error-number,
-.error-didread {
+.error {
   background-color: #7d1e1e;
   color: #c2c2c2;
   padding: 0;
   font-size: 0.7rem;
 }
 
-.error-title.active,
-.error-author.active,
-.error-number.active,
-.error-didread.active {
+.error.active {
   padding: 0.3rem;
 }
