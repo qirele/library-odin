@@ -31,7 +31,8 @@ h1 {
   right: 20px;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="number"] {
   appearance: none;
   border: none;
   transition: all 0.3s;
@@ -43,7 +44,8 @@ input[type="text"] {
   box-shadow: 0px 7px 15px #000000;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus,
+input[type="number"]:focus {
   outline: 5px solid #c2c2c2;
   box-shadow: 0px 7px 15px #717070;
 }
@@ -94,6 +96,9 @@ input[type="text"]:focus {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
   height: 50px;
+  background-color: #2a2a2a;
+  border-radius: 15px;
+  padding-left: 20px;
 }
 
 .row > * {
@@ -102,10 +107,6 @@ input[type="text"]:focus {
 
 .row > *:first-child {
   line-height: 3;
-}
-
-.row > [for="numOfPages"] {
-  line-height: 1;
 }
 
 .radio-wrapper {
@@ -258,4 +259,8 @@ label[for="no"] {
   font-size: 0.7rem;
   font-weight: 600;
   color: #4a4a4a;
+}
+
+input[type="text"]:invalid:focus {
+  outline: 5px solid #ff9494;
 }
