@@ -15,27 +15,39 @@
       <div class="btn-wrapper">
         <button class="btn show">Add book</button>
       </div>
-      <form class="form">
+      <form class="form" novalidate>
         <div class="form-inner-wrapper">
           <div class="row">
-            <label for="title">Title: </label>
+            <label for="title">
+              <p>Title:</p>
+              <p class="error-title" aria-live="polite"></p>
+            </label>
             <input type="text" name="title" id="title" minlength="5" required autocomplete="off" />
           </div>
           <div class="row">
-            <label for="author">Author: </label>
-            <input type="text" name="author" id="author" required autocomplete="off" />
+            <label for="author">
+              <p>Author:</p>
+              <p class="error-author" aria-live="polite"></p>
+            </label>
+            <input type="text" name="author" id="author" minlength="5"  required autocomplete="off" />
           </div>
           <div class="row">
-            <label for="numOfPages">Number of pages: </label>
+            <label for="numOfPages">
+              <p>Number of pages:</p>
+              <p class="error-number" aria-live="polite"></p>
+            </label>
             <input type="number" name="numOfPages" id="numOfPages" autocomplete="off" />
           </div>
           <div class="row">
-            <p>Did read?</p>
+            <div class="label-didread">
+              <p>Did read?</p>
+              <p class="error-didread" aria-live="polite"></p>
+            </div>
             <div class="radio-wrapper">
               <label for="yes">
                 <div>
                   <p>Yes</p>
-                  <input type="radio" name="isRead" value="yes" id="yes" />
+                  <input type="radio" name="isRead" value="yes" id="yes" required />
                 </div>
               </label>
               <label for="no">

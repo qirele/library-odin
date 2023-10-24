@@ -105,9 +105,9 @@ input[type="number"]:focus {
   flex: 1;
 }
 
-.row > *:first-child {
+/* .row > *:first-child {
   line-height: 3;
-}
+} */
 
 .radio-wrapper {
   display: flex;
@@ -261,6 +261,24 @@ label[for="no"] {
   color: #4a4a4a;
 }
 
-input[type="text"]:invalid:focus {
+input[type="text"]:invalid:focus,
+input[type="number"]:invalid:focus {
   outline: 5px solid #ff9494;
+}
+
+.error-title,
+.error-author,
+.error-number,
+.error-didread {
+  background-color: #7d1e1e;
+  color: #c2c2c2;
+  padding: 0;
+  font-size: 0.7rem;
+}
+
+.error-title.active,
+.error-author.active,
+.error-number.active,
+.error-didread.active {
+  padding: 0.3rem;
 }

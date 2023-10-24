@@ -2,6 +2,10 @@ const booksDiv = document.querySelector(".books");
 const showBtn = document.querySelector(".show");
 const form = document.querySelector(".form");
 const addBtn = document.querySelector(".btn.add");
+const titleErrorPara = document.querySelector(".error-title");
+const authorErrorPara = document.querySelector(".error-author");
+const numberErrorPara = document.querySelector(".error-number");
+const didreadErrorPara = document.querySelector(".error-didread");
 
 const myLibrary = [];
 const book1 = new Book("Sapiens", "Yuval Noah Harari", 200, false);
@@ -13,6 +17,9 @@ populateBooks();
 
 showBtn.addEventListener("click", toggleForm);
 form.addEventListener("submit", handleSubmit);
+form.title.addEventListener("input", handleInputTitle);
+form.author.addEventListener("input", handleInputAuthor);
+form.numOfPages.addEventListener("input", handleInputNumber);
 
 function handleCheckmark(e) {
   const bookIdx = e.target.parentNode.dataset.index;
@@ -119,6 +126,21 @@ function toggleForm() {
 function handleSubmit(e) {
   e.preventDefault();
 
+  let shouldSubmit = true;
+
+  if (!form.title.validity.valid) {
+    showTitleError();
+    shouldSubmit = false;
+  }
+
+  if (!form.author.validity.valid) {
+    showAuthorError();
+    shouldSubmit = false;
+  }
+
+  if (!shouldSubmit) return;
+
+
   let title = e.target.title.value;
   let author = e.target.author.value;
   let numPages = e.target.numOfPages.value;
@@ -127,4 +149,55 @@ function handleSubmit(e) {
   addBookToLibrary(title, author, numPages, isRead === "yes");
   populateBooks();
   form.reset(); // reset fields
+}
+
+function showTitleError() {
+  if (form.title.validity.valueMissing) {
+    titleErrorPara.textContent = "You gotta provide a title brochocho";
+  } else if (form.title.validity.tooShort) {
+    titleErrorPara.textContent = `Title should be at least ${form.title.minLength} characters; you entered ${form.title.value.length}.`;
+  }
+
+  titleErrorPara.className = "error-title active";
+}
+function showAuthorError() {
+  if (form.author.validity.valueMissing) {
+    authorErrorPara.textContent = "You gotta provide an author buddy";
+  } else if (form.author.validity.tooShort) {
+    authorErrorPara.textContent = `Author should be at least ${form.author.minLength} characters; you entered ${form.author.value.length}.`;
+  }
+
+  authorErrorPara.className = "error-author active";
+}
+function showNumberError() {
+
+}
+function showDidreadError() {
+}
+
+function handleInputTitle(e) {
+  if (form.title.validity.valid) {
+    titleErrorPara.textContent = "";
+    titleErrorPara.className = "error-title";
+  } else {
+    showTitleError();
+  }
+}
+
+function handleInputAuthor(e) {
+  if (form.author.validity.valid) {
+    authorErrorPara.textContent = "";
+    authorErrorPara.className = "error-title";
+  } else {
+    showAuthorError();
+  }
+}
+
+function handleInputNumber(e) {
+  if (form.numOfPages.validity.valid) {
+    numberErrorPara.textContent = "";
+    numberErrorPara.className = "error-title";
+  } else {
+    showNumberError();
+  }
 }
